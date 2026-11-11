@@ -1,0 +1,29 @@
+name = "telegram-wireguard-bot"
+main = "worker.js"
+compatibility_date = "2024-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+# ==============================================================================
+# Cloudflare KV Namespace Binding (Used for sessions, rate limiting, and wizard state)
+# Create using: npx wrangler kv:namespace create KV
+# Replace YOUR_KV_NAMESPACE_ID with your generated KV namespace ID below.
+# ==============================================================================
+[[kv_namespaces]]
+binding = "KV"
+id = "YOUR_KV_NAMESPACE_ID"
+
+# ==============================================================================
+# Cloudflare D1 Database Binding (Used for persistent encrypted settings and admins)
+# Create using: npx wrangler d1 create wireguard-bot-db
+# Replace YOUR_D1_DATABASE_ID with your generated D1 database ID below.
+# ==============================================================================
+[[d1_databases]]
+binding = "DB"
+database_name = "wireguard-bot-db"
+database_id = "YOUR_D1_DATABASE_ID"
+
+# ==============================================================================
+# Cloudflare Worker Secrets (Do NOT write secret values in this file)
+# The master encryption key must be set securely via Wrangler CLI:
+#   npx wrangler secret put APP_ENCRYPTION_KEY
+# ==============================================================================
